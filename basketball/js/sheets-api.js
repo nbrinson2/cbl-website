@@ -57,7 +57,6 @@ function myCallback(spreadsheetdata) {
     console.log(dates);
     console.log(games);
 
-    document.querySelector(".game-day-of-the-month").innerHTML = spreadsheetdata.feed.entry[7].content.$t[2];
 }
 
 window.onload = function identifyUpcomingGames() {
@@ -72,16 +71,13 @@ window.onload = function identifyUpcomingGames() {
             upcomingGames.push(game);
         }
     });
+    console.log("diwovneio");
 
     // Display data from sheet api on index.html
     document.querySelector("#court-one-teams-six").innerHTML = `${upcomingGames[0].homeTeam} vs. ${upcomingGames[0].awayTeam}`;
     document.querySelector(".time-slot-six").innerHTML = `${upcomingGames[0].time}`;
     document.querySelector(".court-one").innerHTML = `CLA - ${upcomingGames[0].court}`;
 
-    let dateClass = document.getElementsByClassName(".date");
-    for (let index = 0; index < dateClass.length; index++) {
-        dateClass[index].innerHTML = "fairy";
-    }
     //document.querySelector(".date").children[0].innerHTML = "Fairy";
     // `${(upcomingGames[0].date.split("/"))[1]}` + document.querySelector(".individual-game-day").innerHTML;
     document.querySelector(".individual-game-month").innerHTML = `${monthNames[(upcomingGames[0].date.split("/"))[0] - 1]}`;
