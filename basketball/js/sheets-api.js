@@ -1,11 +1,18 @@
 let dates = new Array();
 let todaysDate = new Date();
 let formattedDate = `${todaysDate.getMonth() + 1}/${todaysDate.getDate()}/${todaysDate.getFullYear()}`;
-
 formattedDate = formattedDate.split("/");
+
 let todaysMonth = this.parseInt(formattedDate[0]);
 let todaysDay = this.parseInt(formattedDate[1]);
 let todaysYear = this.parseInt(formattedDate[2]);
+
+// Check for end of the month in regards to upcoming games
+if (todaysDay > (this.lastDayOfMonth(todaysYear,todaysMonth) - 7)) {
+    todaysMonth = todaysMonth + 1;
+    todaysDay = 1;
+}
+
 const monthNames = ["jan", "feb", "mar", "apr", "may", "june",
     "july", "aug", "sept", "oct", "nov", "dec"
 ];
@@ -55,10 +62,10 @@ function myCallback(spreadsheetdata) {
 
         }
     } catch (error) {
-        console.log("barry");
+        //console.log("Testing");
     }
-    console.log(dates);
-    console.log(games);
+    //console.log(dates);
+    //console.log(games);
 }
 
 function compare(a, b) {
@@ -72,6 +79,10 @@ function compare(a, b) {
         comparison = -1;
     }
     return comparison;
+}
+
+function lastDayOfMonth (year, month) {
+    return new Date(year, month + 1, 0).getDate();
 }
 
 window.onload = function identifyUpcomingGames() {
@@ -122,7 +133,7 @@ window.onload = function identifyUpcomingGames() {
     for (let index = 0; index < courtAClass.length; index++) {
         courtAClass[index].innerHTML = `CLA - ${upcomingGames[0].court}`;
         courtBClass[index].innerHTML = `CLA - ${upcomingGames[1].court}`;
-        console.log(courtAClass[index]);
+        //console.log(courtAClass[index]);
     }
 
     for (let index = 0; index < dateClass.length; index++) {
@@ -130,5 +141,5 @@ window.onload = function identifyUpcomingGames() {
         dateClass[index].children[0].innerHTML = `${upcomingGamesDateSplit[1]} ${dateClass[index].children[0].innerHTML}`
     }
 
-    console.log(upcomingGames);
+    //console.log(upcomingGames);
 }
